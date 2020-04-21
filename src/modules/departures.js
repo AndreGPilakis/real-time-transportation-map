@@ -82,7 +82,6 @@ export function getDeparturesForRuns(runs, departures) {
 export function determineRunCoordinates(scalar, previousStopCoordinates, nextStopCoordinates) {
     let xCoordinate;
     let yCoordinate;
-    
     if(previousStopCoordinates) {
         xCoordinate = nextStopCoordinates[0] + scalar * (previousStopCoordinates[0] - nextStopCoordinates[0]);
         yCoordinate = nextStopCoordinates[1] + scalar * (previousStopCoordinates[1] - nextStopCoordinates[1]);
@@ -90,7 +89,8 @@ export function determineRunCoordinates(scalar, previousStopCoordinates, nextSto
         xCoordinate = nextStopCoordinates[0];
         yCoordinate = nextStopCoordinates[1];
     }
-
+    // console.log("Prev: " + previousStopCoordinates);
+    // console.trace();
     return [xCoordinate, yCoordinate];
 }
 

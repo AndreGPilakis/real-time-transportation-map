@@ -288,6 +288,7 @@ export default class Map extends Component {
                                     let atPlatform = runs[index].departure[runs[index].currentDeparture].at_platform;
                                     let runStarted = runs[index].currentDeparture > 0;
 
+
                                     // Determine timestamp (arrival time to next stop)
                                     if (runs[index].departure[runs[index].currentDeparture].estimated_departure_utc) {
                                         arrivalTime = moment.utc(runs[index].departure[runs[index].currentDeparture].estimated_departure_utc);
@@ -328,7 +329,8 @@ export default class Map extends Component {
                                         const scheduledTime = moment.utc(nextDeparture.scheduled_departure_utc);
 
                                         let late = estimatedTime.diff(scheduledTime, 'minutes') >= 5;
-
+                                        console.log(runs.length);
+                                        console.log(runs[runs.length-1]);
                                         runs[index].currentCoordinates = Departures.determineRunCoordinates(scalar, previousStopCoordinates, nextStopCoordinates);
                                         angle = Departures.calculateAngle(previousStopCoordinates, nextStopCoordinates);
                                         if (nextStopCoordinates[0] < previousStopCoordinates[0]) {
