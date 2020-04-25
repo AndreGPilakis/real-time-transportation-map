@@ -49,16 +49,25 @@ function swapRouteType() {
     axios.post('/api/swapRouteType');
 }
 
-function showDisruptions(){
-    axios.get('/disruptions', {
+//Show disruption for the given station
+function getDisruptions(){
+  let myRes = axios.get('/disruptions', {
         params: {
-          ID: 12345
+          ID: 4
         }
       })
       .then(function (response) {
-        console.log(response);
-      })
+        let container = document.getElementById('disruptionsContainer');
+        container.innerHTML = "";
+        let delays = response.data['metro_train'];
+        console.log(delays);
+        for (var i = 0; i < delays.length; i++){
+            container.innerHTML += delays[i].description + "<br>";
+            console.log(delays[i].description);
+        }
+    })
 }
+
 
 function showScheduledRuns() {
     // Swap color of button based on current visibility
@@ -273,8 +282,11 @@ export default class Map extends Component {
                         
                     </Control>
                     <Control position="bottomleft">
+                        <div id="disruptionsContainer">
+                            Disruptions container
+                        </div>
                         <div id="controlPanel">
-                        <button onClick={ showDisruptions } className="control">Show Disruptions</button><br/>
+                        <button onClick={ getDisruptions } className="control">Show Disruptions</button><br/>
                         <button onClick={ swapRouteType } className="control">Switch Transport Type &#8693;</button><br/>
                         <button onClick={ showScheduledRuns } className="control" id="toggleScheduledRuns">Scheduled Runs</button>
                         <div className="control" id="refreshBox">
