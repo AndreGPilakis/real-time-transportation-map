@@ -49,6 +49,17 @@ function swapRouteType() {
     axios.post('/api/swapRouteType');
 }
 
+function showDisruptions(){
+    axios.get('/disruptions', {
+        params: {
+          ID: 12345
+        }
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+}
+
 function showScheduledRuns() {
     // Swap color of button based on current visibility
     if(!this.state.scheduledRunsVisible) {
@@ -87,7 +98,7 @@ function updateRefresh() {
     this.refreshRate = document.getElementById("refreshSlider").value;
     // Stop the current refresh cycle and restart with new refresh time
     if(this.refresh != null) {
-        console.log("Setting new refresh rate to: " + this.refreshRate + " seconds - I have changed this from app.js");
+        console.log("Setting new refresh rate to: " + this.refreshRate);
         clearInterval(this.refresh);
         this.refresh = setInterval(this.updateData, this.refreshRate * SECONDS_TO_MS);
     }
@@ -259,9 +270,11 @@ export default class Map extends Component {
                     <Control position="topright">
                         {/* Render punctuality when there is data */}
                         { !isNaN(punctuality) && <span id="punctualityLabel"><small>Punctuality: </small><span id="bold">{punctuality.toFixed(2)}</span> %</span> }
+                        
                     </Control>
                     <Control position="bottomleft">
                         <div id="controlPanel">
+                        <button onClick={ showDisruptions } className="control">Show Disruptions</button><br/>
                         <button onClick={ swapRouteType } className="control">Switch Transport Type &#8693;</button><br/>
                         <button onClick={ showScheduledRuns } className="control" id="toggleScheduledRuns">Scheduled Runs</button>
                         <div className="control" id="refreshBox">
@@ -329,8 +342,6 @@ export default class Map extends Component {
                                         const scheduledTime = moment.utc(nextDeparture.scheduled_departure_utc);
 
                                         let late = estimatedTime.diff(scheduledTime, 'minutes') >= 5;
-                                        console.log(runs.length);
-                                        console.log(runs[runs.length-1]);
                                         runs[index].currentCoordinates = Departures.determineRunCoordinates(scalar, previousStopCoordinates, nextStopCoordinates);
                                         angle = Departures.calculateAngle(previousStopCoordinates, nextStopCoordinates);
                                         if (nextStopCoordinates[0] < previousStopCoordinates[0]) {
