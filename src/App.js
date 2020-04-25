@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={Index} />
+        <Route exact path="/" component={Map} />
         <Route path="/map" component={Map} />
         <Route path="/debug" component={Debug} />
       </Switch>
