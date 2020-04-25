@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Real-Time Transportation Map
+## Real-Time Transportation Map
 
 A web app integrated with Leaflet to visualize real-time data of Metro train in Melbourne. It requires the [Real-Time Transportation API](https://github.com/JX-Siaw/real-time-transportation-api) to work.
 
