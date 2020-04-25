@@ -87,7 +87,7 @@ function updateRefresh() {
     this.refreshRate = document.getElementById("refreshSlider").value;
     // Stop the current refresh cycle and restart with new refresh time
     if(this.refresh != null) {
-        console.log("Setting new refresh rate to: " + this.refreshRate + " seconds");
+        console.log("Setting new refresh rate to: " + this.refreshRate + " seconds - I have changed this from app.js");
         clearInterval(this.refresh);
         this.refresh = setInterval(this.updateData, this.refreshRate * SECONDS_TO_MS);
     }
