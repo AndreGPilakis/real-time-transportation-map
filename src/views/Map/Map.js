@@ -68,6 +68,24 @@ function getDisruptions(){
     })
 }
 
+//Gets the nearest 5 Myki top-up stations.
+function getMyKiReaders(){
+    let myRes = axios.get('/mykireaders', {
+        params: {
+            latitude: -37.8136,
+            longitude: 144.9631
+        }
+    })
+    .then(function (response){
+        let container = document.getElementById('mykiContainer');
+        let mykiStations = response.data;
+        container.innerHTML = `There are ${response.data.length} nearby myki stations : <br>`;
+        for (var i = 0; i < mykiStations.length; i++){
+            container.innerHTML += `${mykiStations[i].outlet_business} is ${mykiStations[i].outlet_distance} meters from you, at ${mykiStations[i].outlet_name}<br>`
+        }
+    })
+}
+
 
 function showScheduledRuns() {
     // Swap color of button based on current visibility
@@ -285,7 +303,11 @@ export default class Map extends Component {
                         <div id="disruptionsContainer">
                             Disruptions container
                         </div>
+                        <div id="mykiContainer">
+                            Myki container
+                        </div>
                         <div id="controlPanel">
+                        <button onClick={ getMyKiReaders } className="control">Get Myki Readers</button><br/>
                         <button onClick={ getDisruptions } className="control">Show Disruptions</button><br/>
                         <button onClick={ swapRouteType } className="control">Switch Transport Type &#8693;</button><br/>
                         <button onClick={ showScheduledRuns } className="control" id="toggleScheduledRuns">Scheduled Runs</button>
