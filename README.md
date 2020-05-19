@@ -2,9 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Real-Time Transportation Map
 
-A web app integrated with Leaflet to visualize real-time data of Metro train in Melbourne. It requires the [Real-Time Transportation API](https://github.com/JX-Siaw/real-time-transportation-api) to work.
+A web app integrated with Leaflet to visualize real-time data of Metro train in Melbourne. It requires the [Real-Time Transportation API](https://github.com/AndreGPilakis/real-time-transportation-api) to work.
 
-[DEMO](https://xephiz.dev/map)
 
 ## Getting Started
 
@@ -12,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ```bash
 1) Clone the project using the command
-$ git clone https://github.com/JX-Siaw/real-time-transportation-map.git
+$ git clone https://github.com/AndreGPilakis/real-time-transportation-map.git
 
 2) Install the node modules
 $ npm install
@@ -20,7 +19,7 @@ $ npm install
 
 ### Prerequisites
 
-You need to set up the [API](https://github.com/JX-Siaw/real-time-transportation-api) and run it in conjuction with the web app to work
+You need to set up the [API](https://github.com/AndreGPilakis/real-time-transportation-map) and run it in conjuction with the web app to work
 
 ### Running
 
@@ -41,7 +40,7 @@ To deploy the app to a server
 1) ssh into the server
 
 2) Clone the project in the server
-$ git clone https://github.com/JX-Siaw/real-time-transportation-map.git
+$ git clone https://github.com/AndreGPilakis/real-time-transportation-map.git
 
 3) Build the app
 $ npm run build
@@ -60,6 +59,7 @@ Make sure a reverse proxy is set up allowing the web app to call the API at the 
 ## Authors
 
 * **Jeremy Siaw** - *Initial work*
+* **Andre Pilakis** - Current version
 
 ## License
 
@@ -76,9 +76,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Real-Time Transportation Map
 
-A web app integrated with Leaflet to visualize real-time data of Metro train in Melbourne. It requires the [Real-Time Transportation API](https://github.com/JX-Siaw/real-time-transportation-api) to work.
+A web app integrated with Leaflet to visualize real-time data of Metro train in Melbourne. It requires the [Real-Time Transportation API](https://github.com/AndreGPilakis/real-time-transportation-map) to work.
 
-[DEMO](https://xephiz.dev/map)
 
 ## Getting Started
 
@@ -94,7 +93,7 @@ $ npm install
 
 ### Prerequisites
 
-You need to set up the [API](https://github.com/JX-Siaw/real-time-transportation-api) and run it in conjuction with the web app to work
+You need to set up the [API](https://github.com/AndreGPilakis/real-time-transportation-map) and run it in conjuction with the web app to work
 
 ### Running
 
