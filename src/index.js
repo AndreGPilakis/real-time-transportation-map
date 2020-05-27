@@ -6,6 +6,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+require("./SAGE2_AppState.js")
+
 ReactDOM.render(
     <BrowserRouter>
         <App />

@@ -238,6 +238,21 @@ export default class Map extends Component {
         setInterval(this.refreshPage, 10000);
     }
 
+    handleMove(e) {
+        this.setState({ zoom: e.currZoom });
+        console.log(e.target._zoom)
+        var ctr = e.target.getCenter()
+        console.log(ctr)
+        // this.mapRef.current.leafletElement.panTo(ctr);
+
+        // console.log(e)
+        console.log(this.mapRef.current.leafletElement)
+        // this.mapRef.current.leafletElement.setZoom(0)
+        // this.mapRef.current.leafletElement._renderer._center = {lat: -37.89842688615329, lng: 144.97884750366214}
+        // this.mapRef.current.leafletElement._zoom = 10
+        // console.log()
+    }
+
     constructor(props) {
         super(props);
 
@@ -253,9 +268,12 @@ export default class Map extends Component {
             zoom: 13,
             routes: [],
             stationDepartures: [],
-            runs: []
+            runs: [],
+            currentPos: null,
+            position: [-37.78292608704407, 144.9658012390137]
         };
 
+        this.handleMove = this.handleMove.bind(this);
         this.handleZoom = this.handleZoom.bind(this);
         this.updateData = this.updateData.bind(this);
         this.refreshPage = this.refreshPage.bind(this);
@@ -273,9 +291,28 @@ export default class Map extends Component {
         const runs = this.state.runs;
         const punctuality = this.calculatePunctuality();
 
+        var divStyle = {
+            height: '200px', 
+            width: '400px',
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            marginTop: '-100px',
+            zIndex: '1000',
+            marginLeft: '-200px'
+        }
+
+        var pStyle = {
+            fontSize: '100px'
+        }
+
+
         return (
             <div id='transport'>
-                <LeafletMap id="map" ref={this.mapRef} center={position} zoom={this.state.zoom} maxZoom={17} onZoomEnd={this.handleZoom}>
+                <div style={divStyle}>
+                    <p style={pStyle}>{this.props.zoom}</p>
+                </div>
+                <LeafletMap id="map" ref={this.mapRef} scrollWheelZoom={false} center={this.props.center} zoom={this.props.zoom} maxZoom={17} onZoomEnd={this.handleZoom} onmoveend={this.handleMove}>
                     <Control position="topright">
                         {/* Render punctuality when there is data */}
                         { !isNaN(punctuality) && <span id="punctualityLabel"><small>Punctuality: </small><span id="bold">{punctuality.toFixed(2)}</span> %</span> }
@@ -286,6 +323,7 @@ export default class Map extends Component {
                             Disruptions container
                         </div>
                         <div id="controlPanel">
+                        <button onClick={() => { console.log(this.mapRef.current.leafletElement.panTo(this.mapRef.current.leafletElement.options.center)) } } className="control">Center</button><br/>
                         <button onClick={ getDisruptions } className="control">Show Disruptions</button><br/>
                         <button onClick={ swapRouteType } className="control">Switch Transport Type &#8693;</button><br/>
                         <button onClick={ showScheduledRuns } className="control" id="toggleScheduledRuns">Scheduled Runs</button>
