@@ -304,7 +304,11 @@ export default class Map extends Component {
                         <div id="disruptionsContainer">
                             Disruptions container
                         </div>
+                        <div id="mykiContainer">
+                            Myki container
+                        </div>
                         <div id="controlPanel">
+                        <button onClick={ getMyKiReaders } className="control">Get Myki Readers</button><br/>
                         <button onClick={() => { console.log(this.mapRef.current.leafletElement.panTo(this.mapRef.current.leafletElement.options.center)) } } className="control">Center</button><br/>
                         <button onClick={ getDisruptions } className="control">Show Disruptions</button><br/>
                         <button onClick={ swapRouteType } className="control">Switch Transport Type &#8693;</button><br/>
