@@ -49,6 +49,7 @@ function swapRouteType() {
     axios.post('/api/swapRouteType');
 }
 
+// @TODO ask ian
 //Show disruption for the given station
 function getDisruptions(){
   let myRes = axios.get('/disruptions', {
@@ -67,8 +68,8 @@ function getDisruptions(){
         }
     })
 }
-
-//Gets the nearest 5 Myki top-up stations.
+// Gets the nearest 5 Myki top-up stations.
+// Stations are currently hard-coded to be melbourne CBD. (Melbourne central)
 function getMyKiReaders(){
     let myRes = axios.get('/mykireaders', {
         params: {
@@ -83,6 +84,15 @@ function getMyKiReaders(){
         for (var i = 0; i < mykiStations.length; i++){
             container.innerHTML += `${mykiStations[i].outlet_business} is ${mykiStations[i].outlet_distance} meters from you, at ${mykiStations[i].outlet_name}<br>`
         }
+    })
+}
+
+//Gets the nearest 5 Myki top-up stations.
+function rewindTime(){
+    let myRes = axios.get('/rewindTime', {
+    })
+    .then(function (response){
+        console.log("recevied a response");
     })
 }
 
@@ -229,7 +239,6 @@ export default class Map extends Component {
     }
 
     // Calculate the punctuality of all departures
-    // TODO: Possibly move to backend and add API route
     calculatePunctuality() {
         let lateCount = 0, departureCount = 0;
         const stations = this.state.stationDepartures;
@@ -465,7 +474,9 @@ export default class Map extends Component {
                             stations.map((key, index) => {
                                 // Render each station with name and departures
                                 const coordinates = [stations[index].stop_latitude, stations[index].stop_longitude];
-
+                                console.log("logging stations thing. Key : " + key + "index" + index);
+                                console.log(stations[index].departures);
+                                if (stations[index].departures !== undefined){
                                 return <Marker icon={railIcon} position={coordinates}>
                                     <Tooltip>
                                         <strong>{stations[index].stop_name} (Stop ID: {stations[index].stop_id})</strong><br/>
@@ -510,7 +521,7 @@ export default class Map extends Component {
                                         }
                                     </Tooltip>
                                 </Marker>
-                            })
+    }})
                         }
                     </LayerGroup>
                 </LeafletMap>
