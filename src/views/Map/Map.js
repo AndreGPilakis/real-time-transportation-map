@@ -291,27 +291,9 @@ export default class Map extends Component {
         const runs = this.state.runs;
         const punctuality = this.calculatePunctuality();
 
-        var divStyle = {
-            height: '200px', 
-            width: '400px',
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            marginTop: '-100px',
-            zIndex: '1000',
-            marginLeft: '-200px'
-        }
-
-        var pStyle = {
-            fontSize: '100px'
-        }
-
 
         return (
             <div id='transport'>
-                <div style={divStyle}>
-                    <p style={pStyle}>{this.props.zoom}</p>
-                </div>
                 <LeafletMap id="map" ref={this.mapRef} scrollWheelZoom={false} center={this.props.center} zoom={this.props.zoom} maxZoom={17} onZoomEnd={this.handleZoom} onmoveend={this.handleMove}>
                     <Control position="topright">
                         {/* Render punctuality when there is data */}
